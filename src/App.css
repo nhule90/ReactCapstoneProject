@@ -1,0 +1,80 @@
+html {
+  background: #f6f8f7;
+  color: #1a5a33;
+}
+
+header {
+  display: flex;
+  height: 70px;
+  justify-content: start;
+  gap: 15px;
+  align-items: center;
+  padding: 0px 80px;
+  background: #f1a012;
+  /* background: "-webkit-linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)" */
+}
+
+button {
+  height: 44px;
+  font-size: 22px;
+  /* padding: 0px 12px; */
+  color: #f11264;
+  background-color: transparent;
+  border: 0px solid #f1a012;
+  /* border-radius: 3px; */
+  /* min-width: 125px; */
+}
+
+.page {
+  width: calc(100vw - 520px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.btn-container {
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.movie-container {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+}
+
+.house-card {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  justify-content: space-between;
+}
+
+.house-card ul {
+  text-align: left;
+}
+.house-card img {
+  width: 100%;
+}
+main {
+  display: flex;
+  flex-direction: row;
+}
+
+.watchlist {
+  width: 500px;
+  height: calc(100vh - 70px);
+  overflow-y: scroll;
+  position: fixed;
+  top: 70px;
+  right: 0;
+  text-align: center;
+  color:#1a5a33;
+  background: #eeccf1
+}
