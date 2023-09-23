@@ -1,55 +1,23 @@
 import "./App.css";
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import Footer from "./components/Footer";
 import Header from "./components/Header";
-import HouseScreen from "./components/HouseScreen";
-import Watchlist from "./components/Watchlist";
+import HomeScreen from "./components/homeComponents/HomeScreen";
+// import NewRecipeScreen from "./components/newRecipeComponents/NewRecipeScreen";
+import DetailScreen from "./components/detailComponents/DetailScreen";
+import { Routes, Route } from "react-router-dom";
 
 function App() {
-    const [list, setList] = useState([]);
-    const [houseList, setHouseList] = useState([]);
-    const [page, setPage] = useState(1);
-
-    const addHouse = (house) => setList([...list, house]);
-
-    const removeHouse = (house) => {
-        const newState = list.filter((hou) => {
-            return hou !== house;
-        });
-        setList(newState);
-    };
-
-    useEffect(() => {
-        const getData = () => {
-            axios
-                .post(`http://localhost:4006/houses/${page}`, 
-                {
-                    headers: {
-                        "Content-type": "application/json; charset=UTF-8",
-                    },
-                })
-                .then((res) => {
-                    console.log(res.data);
-                    setHouseList(res.data);
-                });
-        };
-        getData();
-    }, [page]);
-
     return (
         <div className="App">
             <Header />
             <main>
-                <HouseScreen
-                    addHouse={addHouse}
-                    houseList={houseList}
-                    page={page}
-                    setPage={setPage}
-                    list={list}
-                    removeHouse={removeHouse}
-                />
-                <Watchlist list={list} removeHouse={removeHouse} />
+                <Routes>
+                    <Route index element={<HomeScreen />} />
+                    {/* <Route path="newRecipe" element={<NewRecipeScreen />} /> */}
+                    <Route path="house/:id" element={<DetailScreen />} />
+                </Routes>
             </main>
+            <Footer />
         </div>
     );
 }

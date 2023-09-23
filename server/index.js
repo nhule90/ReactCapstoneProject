@@ -13,10 +13,13 @@ Favorite.belongsTo(User)
 app.use(express.json());
 app.use(cors());
 const {
+  getHouse,
   getAllHouses,
+  getAllZipcodes,
   addHouse,
   addBulkHouses,
   getPageHouses,
+  getZipcodeHouses,
   editHouse,
   deleteHouse,
 } = require("./controllers/house");
@@ -27,7 +30,10 @@ app.post("/register", register);
 app.post("/login", login);
 
 app.get("/houses", getAllHouses);
-app.post("/houses/:id", getPageHouses);
+app.get("/zipcodes", getAllZipcodes);
+app.get("/house/:id", getHouse);
+app.get("/houses/:id", getPageHouses);
+app.get("/zipcodehouses/:zipcode/:page", getZipcodeHouses);
 app.post('/houses', isAuthenticated, addHouse)
 app.post('/seed',addBulkHouses)
 app.put('/houses/:id', isAuthenticated, editHouse)

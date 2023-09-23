@@ -1,6 +1,6 @@
 import React from "react";
 import HouseCard from "./HouseCard";
-
+import styles from "./Home.module.css"
 const Watchlist = ({ list, removeHouse }) => {
   
   const houseDisplay = list.map((house, index) => {
@@ -10,9 +10,9 @@ const Watchlist = ({ list, removeHouse }) => {
     );
   })
   return (
-    <div className="watchlist">
+    <div className={styles.watchlist}>
       <h1>My Favorite</h1>
-      <div className="movie-container">
+      <div className="house-container">
         {houseDisplay}
       </div>
     </div>

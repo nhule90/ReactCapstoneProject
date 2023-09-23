@@ -1,0 +1,40 @@
+.search_bar svg {
+  height: 80%;
+}
+.search_bar {
+  top: 60px;
+  min-width: 50px;
+  width: 20vw;
+  border-radius: 50px;
+  border: none ;
+  /* background-color: #f8f8f851; */
+  display: flex;
+  align-items: center;
+  text-align: center;
+  padding: 10 10 10 10px;
+  box-sizing: border-box;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 1rem;
+}
+.watchlist {
+  min-width: 300px;
+  height: calc(100vh - 70px);
+  overflow-y: scroll;
+  position: fixed;
+  top: 60px;
+  right: 0;
+  text-align: center;
+  color:#1a5a33;
+  background: #bdb6b6
+}
+.main {
+  align-items: center;
+  text-align: center;
+}
+
+.h1 {
+  top: 60px;
+  /* overflow-y: scroll; */
+  /* position: fixed; */
+}
