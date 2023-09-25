@@ -1,6 +1,15 @@
 {
   "name": "house-db",
+  "main": "server/index.js",
+  "proxy": "http://localhost:4006",
   "version": "0.1.0",
+  "nodemonConfig": {
+    "ext": "js,sql",
+    "ignore": [
+      "src/*",
+      "public/*"
+    ]
+  },
   "private": true,
   "dependencies": {
     "@react-icons/all-files": "^4.1.0",

@@ -69,3 +69,20 @@ footer {
   justify-content: center;
   align-items: center;
 }
+
+.main_nav {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+  color: rgb(255, 255, 255);
+  text-decoration-line: none
+}
+
+.main_nav li {
+  list-style-type: none;
+	padding: 0 10px;
+  text-decoration-line: none
+}
+.main_nav li:hover {
+  font-weight: bold;
+}

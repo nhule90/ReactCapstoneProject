@@ -1,42 +1,55 @@
-import React from "react";
-import { Link } from "react-router-dom";
-
+import {React, useContext} from "react";
+import { NavLink } from "react-router-dom";
+import AuthContext from "../store/authContext";
 import styles from "./Header.module.css";
-
+import { MdOutlineRealEstateAgent} from "react-icons/md";
+import { PiHouseLineBold } from "react-icons/pi";
+import { BiLogInCircle, BiSolidLogInCircle } from "react-icons/bi";
 const Header = () => {
+    const { state, dispatch } = useContext(AuthContext);
+    const styleActiveLink = ({ isActive }) => {
+        return {
+            color: isActive ? "#f11264" : "white",
+        };
+    };
     return (
         <header className={styles.header}>
-            <svg
-                width="55"
-                height="55"
-                viewBox="0 0 512 512"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-            >
-                <circle
-                    cx="256"
-                    cy="256"
-                    r="248"
-                    stroke="#232323"
-                    strokeWidth="20"
-                />
-                <path
-                    d="M100 420L100 80L350 460L350 80"
-                    // d="M255 222L203 132.5L83.9282 338H233L331 168L427.675 338.571L317.5 338.5"
-                    stroke="#232323"
-                    strokeWidth="20"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                />
-            </svg>
+            <MdOutlineRealEstateAgent color="white" size="45" />
             <h1 className={styles.h1}>Houston Real Estate</h1>
             <nav>
-                <Link to="">
-                    <button className={styles.nav_btn}>Home</button>
-                </Link>
-                <Link to="/login">
-                    <button className={styles.nav_btn}>Login</button>
-                </Link>
+                {state.token ? (
+                    <ul className={styles.main_nav}>
+                        <li>
+                            <NavLink style={styleActiveLink} to="/">
+                                <PiHouseLineBold size={30} />
+                            </NavLink>
+                        </li>
+                        <li>
+                            <button
+                                className="logout-btn"
+                                onClick={() => dispatch({ type: "LOGOUT" })}
+                            >
+                                <BiSolidLogInCircle size={30} color="white"/>
+                            </button>
+                        </li>
+                    </ul>
+                ) : (
+                    <ul className={styles.main_nav}>
+                        <li>
+                            <NavLink style={styleActiveLink} to="/">
+                                <PiHouseLineBold
+                                    size={30}
+                                    style={styleActiveLink}
+                                />
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink style={styleActiveLink} to="/auth">
+                                <BiLogInCircle size={30} />
+                            </NavLink>
+                        </li>
+                    </ul>
+                )}
             </nav>
         </header>
     );

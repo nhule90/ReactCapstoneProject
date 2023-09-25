@@ -11,7 +11,6 @@ module.exports = {
             primaryKey: true
         },
         username: DataTypes.STRING,
-        hashedPass: DataTypes.STRING,
-        isAdmin:DataTypes.BOOLEAN,
+        hashedPass: DataTypes.STRING
     })
 }

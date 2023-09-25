@@ -12,9 +12,10 @@ const HouseScreen = ({
 }) => {
     const decrement = () => setPage(page - 1);
     const increment = () => setPage(page + 1);
+    const reset = () => setPage(1);
     const houseDisplay = houseList.map((house, index) => {
         return (
-            <HouseCard
+            <HouseCard key={index}
                 addHouse={addHouse}
                 house={house}
                 list={list}
@@ -22,7 +23,7 @@ const HouseScreen = ({
             />
         );
     });
-    const listZipcodes = availZipcodes.map((code) => <li>{code}</li>);
+    const listZipcodes = availZipcodes.map((code) => <li key={code}>{code}</li>);
 
     if (houseList.length > 0) {
         return (
@@ -37,7 +38,7 @@ const HouseScreen = ({
             </div>
         );
     } else {
-        setPage(1)
+        
         return (
             <div className="page">
                 <h3>Unable to find any houses in that zipcode</h3>
