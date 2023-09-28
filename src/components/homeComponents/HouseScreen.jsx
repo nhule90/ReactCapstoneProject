@@ -1,6 +1,6 @@
 import React from "react";
 import HouseCard from "./HouseCard";
-import styles from "./Home.module.css";
+// import styles from "./Home.module.css";
 const HouseScreen = ({
     addHouse,
     houseList,
@@ -12,7 +12,6 @@ const HouseScreen = ({
 }) => {
     const decrement = () => setPage(page - 1);
     const increment = () => setPage(page + 1);
-    const reset = () => setPage(1);
     const houseDisplay = houseList.map((house, index) => {
         return (
             <HouseCard key={index}

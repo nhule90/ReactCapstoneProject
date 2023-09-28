@@ -5,6 +5,7 @@ const initialState = {
     token: null,
     exp: null,
     username: null,
+    userhouses: null
 };
 
 const AuthContext = createContext();
@@ -14,6 +15,7 @@ const getLocalData = () => {
     const storedExp = localStorage.getItem("exp");
     const storedId = localStorage.getItem("userId");
     const storedName = localStorage.getItem("username");
+    const storedHouses = localStorage.getItem('userhouses')
 
     let remainingTime = storedExp - new Date().getTime();
     if (remainingTime < 0) {
@@ -27,6 +29,7 @@ const getLocalData = () => {
         exp: storedExp,
         userId: storedId,
         username: storedName,
+        userhouses: storedHouses,
     };
 };
 
@@ -34,12 +37,13 @@ const AuthContextProvider = (props) => {
     const reducer = (state, action) => {
         switch (action.type) {
             case "LOGIN":
-                let { token, exp, userId, username } = action.payload;
+                let { token, exp, userId, username, userhouses } = action.payload;
                 localStorage.setItem("token", token);
                 localStorage.setItem("exp", exp);
                 localStorage.setItem("userId", userId);
                 localStorage.setItem("username", username);
-                return { ...state, token, exp, userId, username };
+                localStorage.setItem("userhouses",userhouses)
+                return { ...state, token, exp, userId, username, userhouses };
             case "LOGOUT":
                 localStorage.clear();
                 window.location.reload(false);
@@ -50,8 +54,9 @@ const AuthContextProvider = (props) => {
                     userId: u,
                     exp: e,
                     username: n,
+                    userhouses: h
                 } = action.payload;
-                return { ...state, token: t, userId: +u, exp: +e, username: n };
+                return { ...state, token: t, userId: +u, exp: +e, username: n, userhouses: h };
             default:
                 return state;
         }

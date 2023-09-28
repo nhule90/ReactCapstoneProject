@@ -11,22 +11,9 @@ const HomeScreen = () => {
     const [zipcode, setZipcode] = useState(77014);
     const [page, setPage] = useState(1);
     const [avaiableZipcodes, setAvailableZipcodes] = useState([]);
-    const [userFavs, setUserFavs] = useState([]);
-    const getUserHouses = () => {
-        const userFavsURL =
-            serverURL + "/userhouses/" + state.userId.toString();
-        axios
-            .get(userFavsURL, {
-                headers: {
-                    "Content-type": "application/json; charset=UTF-8",
-                },
-            })
-            .then((res) => {
-                setUserFavs(res.data);
-                console.log(res.data);
-            });
-    };
-    let initList = state.token? userFavs:[]
+    
+    let initList = state.token? state.userhouses:[]
+    console.log(state.userhouses)
     const [list, setList] = useState(initList);
     const addHouse = (house) => {
         setList([...list, house]);
@@ -94,23 +81,6 @@ const HomeScreen = () => {
                 });
         };
         getZipcodes();
-        const getUserHouses = () => {
-            const userFavsURL =
-                serverURL + "/userhouses/" + state.userId.toString();
-            axios
-                .get(userFavsURL, {
-                    headers: {
-                        "Content-type": "application/json; charset=UTF-8",
-                    },
-                })
-                .then((res) => {
-                    setList(res.data);
-                    console.log(res.data);
-                });
-        };
-        if (state.token) {
-            getUserHouses();
-        }
 
         var zipcodeURL = `http://localhost:4006/zipcodehouses/${zipcode}/${page}`;
 

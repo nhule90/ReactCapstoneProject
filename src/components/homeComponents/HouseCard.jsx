@@ -24,7 +24,7 @@ const HouseCard = ({ house, addHouse, removeHouse, list }) => {
     return (
         <div className="house-card">
             <div>
-                <img src={house.photo_link} />
+                <img src={house.photo_link} alt="" />
                 {button}
                 <ul>
                     <li>
