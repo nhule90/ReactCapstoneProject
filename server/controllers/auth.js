@@ -17,72 +17,87 @@ const createToken = (username, id) => {
 };
 
 module.exports = {
-  login: async (req, res) => {
-    try {
-      let { username, password } = req.body;
-      let foundUser = await User.findOne({ where: { username: username } });
-      if (foundUser) {
-        const isAuthenticated = bcrypt.compareSync(
-          password,
-          foundUser.hashedPass
-        );
-        if (isAuthenticated) {
-          let token = createToken(
-            foundUser.dataValues.username,
-            foundUser.dataValues.id
-          );
-          const exp = Date.now() + 1000 * 60 * 60 * 48;
-          const data = {
-            username: foundUser.dataValues.username,
-            userId: foundUser.dataValues.id,
-            token: token,
-            exp: exp,
-          };
-          res.status(200).send(data);
-        } else {
-          res.status(400).send("Password is incorrect");
+    login: async (req, res) => {
+        try {
+            let { username, password } = req.body;
+            let foundUser = await User.findOne({
+                where: { username: username },
+            });
+            if (foundUser) {
+                const isAuthenticated = bcrypt.compareSync(
+                    password,
+                    foundUser.hashedPass
+                );
+                if (isAuthenticated) {
+                    let token = createToken(
+                        foundUser.dataValues.username,
+                        foundUser.dataValues.id
+                    );
+                    const exp = Date.now() + 1000 * 60 * 60 * 48;
+                    const data = {
+                        username: foundUser.dataValues.username,
+                        userId: foundUser.dataValues.id,
+                        token: token,
+                        exp: exp,
+                    };
+                    res.status(200).send(data);
+                } else {
+                    res.status(400).send("Password is incorrect");
+                }
+            } else {
+                res.status(400).send("User does not exist.");
+            }
+        } catch (error) {
+            console.error(error);
+            res.status(400).send(error);
         }
-      } else {
-        res.status(400).send("User does not exist.");
-      }
-    } catch (error) {
-      console.error(error);
-      res.status(400).send(error);
-    }
-  },
-  register: async (req, res) => {
-    try {
-      let { username, password } = req.body;
-      console.log(username)
-      let foundUser = await User.findOne({ where: { username: username } });
-      if (foundUser) {
-        res.status(400).send("Username is Taken!");
-      } else {
-        const salt = bcrypt.genSaltSync(10);
-        const hash = bcrypt.hashSync(password, salt);
+    },
+    register: async (req, res) => {
+        try {
+            let { username, password } = req.body;
+            console.log(username);
+            let foundUser = await User.findOne({
+                where: { username: username },
+            });
+            if (foundUser) {
+                res.status(400).send("Username is Taken!");
+            } else {
+                const salt = bcrypt.genSaltSync(10);
+                const hash = bcrypt.hashSync(password, salt);
 
-        let newUser = await User.create({
-          username: username,
-          hashedPass: hash,
-        });
+                let newUser = await User.create({
+                    username: username,
+                    hashedPass: hash,
+                });
 
-        let token = createToken(
-          newUser.dataValues.username,
-          newUser.dataValues.id
-        );
-        const exp = Date.now() + 1000 * 60 * 60 * 48;
+                let token = createToken(
+                    newUser.dataValues.username,
+                    newUser.dataValues.id
+                );
+                const exp = Date.now() + 1000 * 60 * 60 * 48;
 
-        const data = {
-          username: newUser.dataValues.username,
-          userId: newUser.dataValues.id,
-          token: token,
-          exp: exp,
-        };
-        res.status(200).send(data);
-      }
-    } catch (error) {
-      console.error(error);
-      res.status(400).send(error);
-    }
-  },
+                const data = {
+                    username: newUser.dataValues.username,
+                    userId: newUser.dataValues.id,
+                    token: token,
+                    exp: exp,
+                };
+                res.status(200).send(data);
+            }
+        } catch (error) {
+            console.error(error);
+            res.status(400).send(error);
+        }
+    },
+    addHouse: async (req, res) => {
+        try {
+            const { house_id, userId } = req.body;
+            await Favorite.create({ house_id, userId });
+            res.sendStatus(200);
+        } catch (error) {
+            console.log("ERROR IN addFavorites");
+            console.log(error);
+            res.sendStatus(400);
+        }
+    },
 };

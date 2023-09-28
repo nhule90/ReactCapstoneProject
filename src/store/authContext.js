@@ -42,6 +42,7 @@ const AuthContextProvider = (props) => {
                 return { ...state, token, exp, userId, username };
             case "LOGOUT":
                 localStorage.clear();
+                window.location.reload(false);
                 return initialState;
             case "RETURNING_USER":
                 let {

@@ -19,6 +19,7 @@ const Header = () => {
             <nav>
                 {state.token ? (
                     <ul className={styles.main_nav}>
+                        <li>Hello, {state.username}</li>
                         <li>
                             <NavLink style={styleActiveLink} to="/">
                                 <PiHouseLineBold size={30} />

@@ -12,7 +12,7 @@ const Auth = () => {
         e.preventDefault();
         let body = { username, password };
         axios
-            .post(register ? "/register" : "/login", body)
+            .post(register ? "/login" : "/register", body)
             .then((res) => {
                 dispatch({ type: "LOGIN", payload: res.data });
             })
@@ -38,10 +38,10 @@ const Auth = () => {
                         placeholder="Password"
                         onChange={(e) => setPassword(e.target.value)}
                     />
-                    <button>{register ? "Sign Up" : "Login"}</button>
+                    <button>{register ? "Login" : "Sign Up"}</button>
                 </form>
                 <button onClick={() => setRegister(!register)}>
-                    Need to {register ? "Login" : "Sign Up"}?
+                    Need to {register ? "Sign Up" : "Login"}?
                 </button>
             </div>
         </main>

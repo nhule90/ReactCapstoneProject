@@ -6,7 +6,7 @@ const Watchlist = ({ list, removeHouse }) => {
   const houseDisplay = list.map((house, index) => {
     
     return (
-      <HouseCard key={index} house={house} removeHouse={removeHouse} list={list} />
+      <HouseCard key={`WL${index}`} house={house} removeHouse={removeHouse} list={list} />
     );
   })
   return (

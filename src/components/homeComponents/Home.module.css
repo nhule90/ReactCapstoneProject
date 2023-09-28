@@ -18,7 +18,7 @@
   font-size: 1rem;
 }
 .watchlist {
-  min-width: 300px;
+  width: 300px;
   height: calc(100vh - 70px);
   overflow-y: scroll;
   position: fixed;
